@@ -25,10 +25,10 @@ void int_checker() {
         for (int i = 2 ; i <= x ; i++ ) {
             if (x % i == 0) { isNguyenTo = false; break; }
         }
+        if (isNguyenTo) printf("x la so nguyen to.\n");
+        else printf("x khong la so nguyen to.\n");
     }
 
-    if (isNguyenTo) printf("x la so nguyen to.\n");
-    else printf("x khong la so nguyen to.\n");
 
     // Kiem tra neu x la so chinh phuong
     bool isChinhPhuong = false;
