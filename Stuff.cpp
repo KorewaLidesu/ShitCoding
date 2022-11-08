@@ -1,33 +1,35 @@
-#include <stdio.h>
+#include <iostream>
 #include <math.h>
 
 // Function template
 // Chuc nang : Description
-void func_name() {
-}
+// void func_name() {
+// }
 
 // Chuc nang 1: Kiem tra so nguyen
 void int_checker() {
     // Tao va nhap bien
     int x;
-    printf("x = "); scanf("%d", &x);
+    std::cout<<"x = "; std::cin>>x;
     
-    // TODO: Kiem tra neu x la so nguyen
-    // if() printf("")
+    // Kiem tra neu x la so nguyen
+    if(x % (int) x != 0) std::cout<<"x khong la so nguyen";
+    else std::cout<<"x la so nguyen";
 
     // Kiem tra neu x la so nguyen to
     bool isNguyenTo = true;
     if (x < 2) {
         printf("Khong the xet tinh nguyen to cua x.\n"); 
+        return;
     }
     if (x > 3) {
         for (int i = 2 ; i <= x ; i++ ) {
             if (x % i == 0) { isNguyenTo = false; break; }
         }
-        if (isNguyenTo) printf("x la so nguyen to.\n");
-        else printf("x khong la so nguyen to.\n");
     }
 
+    if (isNguyenTo) std::cout<<"x la so nguyen to.\n";
+    else std::cout<<"x khong la so nguyen to.\n";
 
     // Kiem tra neu x la so chinh phuong
     bool isChinhPhuong = false;
@@ -35,75 +37,88 @@ void int_checker() {
         if (x == i * i) {isChinhPhuong = true; break;}
     }
 
-    if (isChinhPhuong) printf("x la so chinh phuong.\n");
-    else printf("x khong la so chinh phuong.\n");
+    if (isChinhPhuong) std::cout<<"x la so chinh phuong.\n";
+    else std::cout<<"x khong la so chinh phuong.\n";
 }
 
 // Chuc nang 2: Tim Uoc so chung va boi so chung cua 2 so
 void function2() {
     // Tao va nhap bien
-    int x, y;
-    printf("x = "); scanf("%d", &x);
-    printf("y = "); scanf("%d", &y);
-
-    // Holder
-    int tmp1 = x, tmp2 = y;
+    int x, y, USCLN;
+    std::cout<<"x = "; std::cin>>x;
+    std::cout<<"y = "; std::cin>>y;
 
     // Tim USCLN cua 2 so
-    while (tmp1 != tmp2) {
-        if (tmp1 > tmp2) tmp1 -= tmp2;
-        else tmp2 -= tmp1;
-    }
-    printf("Uoc so chung lon nhat cua 2 so: %d", tmp1);
+    if (x != y) {
+        int tmp1 = x, tmp2 = y, holder;
+        while (tmp2 != 0) {
+            holder = tmp1;
+            tmp1 = tmp2;
+            tmp2 = holder % tmp2;
+        }
+        USCLN = tmp1;
+    } else {USCLN = x;}
+    std::cout<<"Uoc so chung lon nhat cua 2 so: " << USCLN << std::endl;
 
-    // Holder
-    tmp1 = x, tmp2 = y;
-
-    // TODO: Tim BSCNN cua 2 so
-    printf("Boi so chung lon nhat cua 2 so: %d", tmp1);
+    // Tim BSCNN cua 2 so
+    std::cout<<"Boi so chung lon nhat cua 2 so: " << (x * y) / USCLN;
 }
 
 // Chuc nang 3: Chuong trinh tinh tien cho quan Karaoke
 void karaoke_count() {
     // Tao va nhap bien
-    int begin, end;
-    printf("Gio bat dau: "); scanf("%d", &begin);
-    printf("Gio ket thuc: "); scanf("%d", &end);
+    short begin, end, working_hours;
+    std::cout<<"Goi bat dau: "; std::cin>>begin;
+    std::cout<<"Goi ket thuc: "; std::cin>>end;
 
-    // TODO: Rework
-    if (begin < 12) {
-        printf("Vi quan khong hoat dong truoc 12h, gio bat dau chuyen thanh 12h.");
+
+    // Kiem tra mot so dieu kien 
+    if ((begin < 12 || begin > 23) && end < 12) {
+        std::cout<<"Thoi gian lam viec khong phu hop.\n";
         return;
     }
-    if (end > 23) {
-        printf("Vi quan khong hoat dong sau 23h, gio ket thuc chuyen thanh 23h.");
-        return;
-    }
-    int working_hours = end - begin;
 
-    // Salary init
-    int salary = 150000;
-    int total_amount = 0;
+    if (begin >= 12 || end <= 23) {
+        if (begin < 12) {
+            std::cout<<"Gio bat dau truoc thoi gian quan mo cua. Dieu chinh lai thanh 12h.\n";
+            begin = 12;
+        }
+        if (end > 23) {
+            std::cout<<"Gio ket thuc sau thoi gian quan mo cua. Dieu chinh lai thanh 23h.\n";
+            end = 23;
+        }
+    }
+
+    // Khoi tao gia tri cac bien can su dung
+    working_hours = end - begin;
+
+    long salary = 150000;
+    long total_amount = 0;
 
     // Tinh toan tien luong nhan duoc
     if (working_hours <= 3) total_amount = salary * working_hours;
-    else total_amount = salary * 3 + salary * 0,7 * (working_hours - 3);
+    else total_amount = salary * 3 + salary * 0.7 * (working_hours - 3);
 
-    if (begin >= 14 && begin <= 17) total_amount *= 0,9;
+    if (begin >= 14 && begin <= 17) total_amount *= 0.9;
 
-    printf("Ban nhan duoc %d sau khi lam %d tieng", total_amount, working_hours);
+    std::cout<< "Ban nhan duoc " << total_amount << " sau khi lam viec duoc " << working_hours << " tieng.\n";
+    return;
+    
 }
 
-// This will getting call first and init menu option
+// Init menu
 int main() {
     //  Khoi tao bien chon menu
     int menu_choice;
 
-    // TODO: Tao giao dien cho menu
-    // printf(""); 
+    // Tao giao dien cho menu
+    std::cout<< "Menu:\n";
+    std::cout<< "1. Kiem tra so nguyen\n";
+    std::cout<< "2. Tim Uoc so chung va boi so chung cua 2 so\n";
+    std::cout<< "3. Chuong trinh tinh tien cho quan Karaoke\n";
 
     // Chon chuc nang
-    printf("Input: "); scanf("%d", &menu_choice);
+    std::cout<< "Input: "; std::cin>> menu_choice;
 
     switch (menu_choice)
     {
@@ -116,6 +131,6 @@ int main() {
     // case <function>:
     //     (); break;
     default:
-        printf(""); break;
+        std::cout<< "Lua chon khong phu hop. Chuong trinh dung lai."; break;
     }
 }
