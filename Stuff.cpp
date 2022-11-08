@@ -94,7 +94,7 @@ void karaoke_count() {
     printf("Ban nhan duoc %d sau khi lam %d tieng", total_amount, working_hours);
 }
 
-// Init menu
+// This will getting call first and init menu option
 int main() {
     //  Khoi tao bien chon menu
     int menu_choice;
