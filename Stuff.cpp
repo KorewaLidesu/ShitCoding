@@ -19,7 +19,6 @@ void int_checker() {
     bool isNguyenTo = true;
     if (x < 2) {
         printf("Khong the xet tinh nguyen to cua x.\n"); 
-        return;
     }
     if (x > 3) {
         for (int i = 2 ; i <= x ; i++ ) {
